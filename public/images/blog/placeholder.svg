@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBF7F0"/>
+      <stop offset="100%" style="stop-color:#F5EFE3"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4A35A"/>
+      <stop offset="100%" style="stop-color:#B87333"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect x="50" y="280" width="200" height="4" rx="2" fill="url(#accentGradient)"/>
+  <text x="50" y="340" font-family="Georgia, serif" font-size="48" fill="#1A1F26" font-weight="bold">Portal del</text>
+  <text x="50" y="400" font-family="Georgia, serif" font-size="48" fill="#1A1F26" font-weight="bold">Inmigrante</text>
+  <text x="50" y="460" font-family="system-ui, sans-serif" font-size="24" fill="#4A5568">Información legal confiable</text>
+  <circle cx="1000" cy="315" r="150" fill="url(#accentGradient)" opacity="0.1"/>
+  <circle cx="1050" cy="265" r="100" fill="url(#accentGradient)" opacity="0.15"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBF7F0"/>
+      <stop offset="50%" style="stop-color:#F5EFE3"/>
+      <stop offset="100%" style="stop-color:#EDE5D4"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4A35A"/>
+      <stop offset="100%" style="stop-color:#B87333"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="1100" cy="100" r="200" fill="#C4A35A" opacity="0.05"/>
+  <circle cx="100" cy="530" r="150" fill="#B87333" opacity="0.05"/>
+  <circle cx="1050" cy="500" r="180" fill="#C4A35A" opacity="0.08"/>
+  
+  <!-- Gold accent line -->
+  <rect x="100" y="200" width="120" height="6" rx="3" fill="url(#goldGrad)"/>
+  
+  <!-- Main title -->
+  <text x="100" y="280" font-family="Georgia, serif" font-size="72" fill="#1A1F26" font-weight="bold">Portal del</text>
+  <text x="100" y="370" font-family="Georgia, serif" font-size="72" fill="#1A1F26" font-weight="bold">Inmigrante</text>
+  
+  <!-- Tagline -->
+  <text x="100" y="440" font-family="system-ui, sans-serif" font-size="28" fill="#4A5568">Tu guía confiable en el camino migratorio</text>
+  
+  <!-- Categories -->
+  <g font-family="system-ui, sans-serif" font-size="18">
+    <rect x="100" y="490" width="140" height="36" rx="18" fill="#C4A35A" opacity="0.15"/>
+    <text x="170" y="514" fill="#C4A35A" text-anchor="middle">Inmigración</text>
+    
+    <rect x="260" y="490" width="180" height="36" rx="18" fill="#10B981" opacity="0.15"/>
+    <text x="350" y="514" fill="#059669" text-anchor="middle">Visas Humanitarias</text>
+    
+    <rect x="460" y="490" width="130" height="36" rx="18" fill="#EF4444" opacity="0.15"/>
+    <text x="525" y="514" fill="#DC2626" text-anchor="middle">Accidentes</text>
+    
+    <rect x="610" y="490" width="170" height="36" rx="18" fill="#3B82F6" opacity="0.15"/>
+    <text x="695" y="514" fill="#2563EB" text-anchor="middle">Derechos Legales</text>
+  </g>
+  
+  <!-- Powered by badge -->
+  <text x="100" y="580" font-family="system-ui, sans-serif" font-size="14" fill="#9CA3AF">Powered By Manuel Solis Law Firm</text>
+</svg>

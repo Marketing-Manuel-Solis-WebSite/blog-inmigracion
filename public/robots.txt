@@ -1,0 +1,20 @@
+# Robots.txt para El Portal del Inmigrante
+# https://elportaldelinmigrante.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://elportaldelinmigrante.com/sitemap.xml
+
+# Bloquear páginas de administración (si las hay)
+Disallow: /api/
+Disallow: /_next/
+
+# Permitir indexación de imágenes
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Crawl-delay para ser amigables con el servidor
+User-agent: *
+Crawl-delay: 1
