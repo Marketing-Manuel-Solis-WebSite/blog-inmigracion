@@ -3,15 +3,36 @@ import nodemailer from 'nodemailer';
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
-// 1. Configuración de Firebase Admin
-const serviceAccount = process.env.FIREBASE_SERVICE_ACCOUNT 
-  ? JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT) 
-  : null;
+// 1. Configuración de Firebase Admin con limpieza de clave
+const getServiceAccount = () => {
+  if (!process.env.FIREBASE_SERVICE_ACCOUNT) return null;
+  
+  try {
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    // CORRECCIÓN CRÍTICA: Reemplazar dobles barras invertidas (\\n) por saltos de línea reales (\n)
+    if (serviceAccount.private_key) {
+      serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+    }
+    return serviceAccount;
+  } catch (e) {
+    console.error('Error parseando credenciales de Firebase:', e);
+    return null;
+  }
+};
 
+const serviceAccount = getServiceAccount();
+
+// Inicialización segura: solo si tenemos cuenta y no se ha iniciado antes
 if (serviceAccount && !getApps().length) {
-  initializeApp({
-    credential: cert(serviceAccount)
-  });
+  try {
+    initializeApp({
+      credential: cert(serviceAccount)
+    });
+  } catch (error) {
+    console.error('Error inicializando Firebase Admin:', error);
+    // No lanzamos error aquí para no romper el build si las credenciales fallan,
+    // el error saltará cuando se intente usar la API.
+  }
 }
 
 // 2. Configuración de Nodemailer
@@ -34,7 +55,7 @@ export async function POST(req: Request) {
     }
 
     if (!getApps().length) {
-      return NextResponse.json({ error: 'Firebase Admin not configured' }, { status: 500 });
+      return NextResponse.json({ error: 'Firebase Admin not configured correctly' }, { status: 500 });
     }
 
     const db = getFirestore();
@@ -43,7 +64,7 @@ export async function POST(req: Request) {
     // Obtener suscriptores
     const subsSnapshot = await db.collection('artifacts').doc(APP_ID).collection('public').doc('data').collection('subscribers').get();
     
-    // CORRECCIÓN TYPESCRIPT: Usamos 'any' para evitar conflictos de tipos
+    // Mapeo seguro con tipos 'any' para evitar errores de compilación
     const emails = subsSnapshot.docs
       .map((doc: any) => doc.data().email)
       .filter((e: any) => e);
