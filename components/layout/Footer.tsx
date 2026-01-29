@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Youtube, Mail, Phone, MapPin, Heart } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-react';
 import { siteConfig, categories } from '@/lib/config';
+import NewsletterForm from '@/components/ui/NewsletterForm';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -8,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-ink-900 text-cream-100 overflow-hidden">
       {/* Decorative Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-accent-gold to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-accent-copper to-transparent rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
       </div>
@@ -27,16 +28,12 @@ export default function Footer() {
               Recibe las últimas noticias sobre inmigración, cambios en leyes y guías útiles
               directamente en tu correo. Sin spam, solo información valiosa.
             </p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-              <input
-                type="email"
-                placeholder="Tu correo electrónico"
-                className="flex-1 px-5 py-4 bg-ink-800 border border-ink-700 rounded-xl text-cream-100 placeholder:text-ink-400 focus:outline-none focus:border-accent-gold focus:ring-2 focus:ring-accent-gold/20 transition-all"
-              />
-              <button type="submit" className="btn-gold whitespace-nowrap">
-                Suscribirme
-              </button>
-            </form>
+            
+            {/* Aquí conectamos el formulario real */}
+            <div className="max-w-lg mx-auto">
+              <NewsletterForm variant="footer" />
+            </div>
+
             <p className="text-body-sm text-ink-400 mt-4">
               Al suscribirte, aceptas recibir correos de El Portal del Inmigrante
             </p>

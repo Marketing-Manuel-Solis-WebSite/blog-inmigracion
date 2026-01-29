@@ -1,0 +1,59 @@
+type User @table {
+  displayName: String!
+  createdAt: Timestamp!
+  email: String
+  photoUrl: String
+  dietaryPreferences: [String]
+}
+
+type Recipe @table {
+  owner: User!
+  title: String!
+  instructions: [String!]!
+  createdAt: Timestamp!
+  isPublic: Boolean!
+  description: String
+  prepTime: String
+  cookTime: String
+  servings: Int
+  cuisine: String
+  mealType: String
+  imageUrl: String
+  nutritionalInfo: String
+}
+
+type Ingredient @table {
+  recipe: Recipe!
+  name: String!
+  quantity: Float!
+  unit: String!
+  notes: String
+}
+
+type MealPlan @table {
+  user: User!
+  name: String!
+  createdAt: Timestamp!
+  isPublic: Boolean!
+  description: String
+  startDate: Date
+  endDate: Date
+}
+
+type MealPlanEntry @table {
+  mealPlan: MealPlan!
+  recipe: Recipe!
+  dayOfWeek: String!
+  mealType: String!
+  notes: String
+}
+
+type ShoppingListItem @table {
+  user: User!
+  name: String!
+  quantity: Float!
+  unit: String!
+  isChecked: Boolean!
+  recipe: Recipe
+  notes: String
+}
