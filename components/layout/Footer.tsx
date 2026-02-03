@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Facebook, Instagram, Youtube, Phone, Mail, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
 import { siteConfig, categories } from '@/lib/config';
 import NewsletterForm from '@/components/ui/NewsletterForm';
 
@@ -7,92 +7,90 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-ink-900 text-cream-100 overflow-hidden">
-      {/* Decorative Pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-accent-gold to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-radial from-accent-copper to-transparent rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      </div>
-
-      {/* Newsletter Section */}
-      <div className="relative border-b border-ink-700/50">
-        <div className="max-w-wide mx-auto px-4 lg:px-6 py-16">
+    <footer className="bg-white">
+      {/* Newsletter Section - Más Grande */}
+      <div className="border-y border-gray-100 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6 py-20">
           <div className="max-w-2xl mx-auto text-center">
-            <span className="inline-block px-4 py-1.5 bg-accent-gold/20 text-accent-gold rounded-full text-body-sm font-medium mb-4">
-              Newsletter Semanal
-            </span>
-            <h3 className="font-display text-display-sm text-cream-50 mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-100 rounded-full mb-6">
+              <Mail className="w-4 h-4 text-yellow-600" />
+              <span className="text-sm font-semibold text-yellow-700 uppercase tracking-wide">Newsletter Semanal</span>
+            </div>
+            
+            <h3 className="text-3xl font-bold text-slate-900 mb-4">
               Mantente informado sobre tus derechos
             </h3>
-            <p className="text-cream-300 text-body-lg mb-8">
-              Recibe las últimas noticias sobre inmigración, cambios en leyes y guías útiles
-              directamente en tu correo. Sin spam, solo información valiosa.
+            <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+              Recibe las últimas noticias sobre inmigración, cambios en leyes y guías útiles directamente en tu correo. Sin spam, solo información valiosa.
             </p>
             
-            {/* Aquí conectamos el formulario real */}
             <div className="max-w-lg mx-auto">
               <NewsletterForm variant="footer" />
             </div>
 
-            <p className="text-body-sm text-ink-400 mt-4">
+            <p className="text-sm text-slate-500 mt-5">
               Al suscribirte, aceptas recibir correos de El Portal del Inmigrante
             </p>
           </div>
         </div>
-      </div>
+      </div>¿
 
-      {/* Main Footer */}
-      <div className="relative max-w-wide mx-auto px-4 lg:px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      {/* Main Footer - Espacioso */}
+      <div className="max-w-7xl mx-auto px-6 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12">
+          
           {/* Brand Column */}
-          <div className="lg:col-span-1">
+          <div>
             <Link href="/" className="inline-flex items-center gap-3 group mb-6">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent-gold to-accent-copper flex items-center justify-center shadow-glow-gold group-hover:scale-105 transition-transform">
-                <span className="text-cream-50 font-display font-bold text-2xl">P</span>
+              <div className="w-14 h-14 rounded-xl bg-slate-950 flex items-center justify-center group-hover:bg-slate-900 transition-colors shadow-lg">
+                <span className="text-yellow-500 font-bold text-2xl">P</span>
               </div>
-              <div>
-                <h4 className="font-display font-semibold text-cream-50 text-lg leading-tight">
-                  El Portal del
-                </h4>
-                <p className="text-accent-gold font-serif text-sm -mt-1">Inmigrante</p>
+              <div className="flex flex-col">
+                <span className="text-slate-900 text-xl font-bold tracking-tight leading-none">
+                  El Portal
+                </span>
+                <span className="text-yellow-600 text-xs font-semibold uppercase tracking-wider leading-none mt-0.5">
+                  del Inmigrante
+                </span>
               </div>
             </Link>
-            <p className="text-cream-300 text-body-md mb-6 max-w-xs">
-              Tu fuente confiable de información sobre inmigración, visas y derechos legales en
-              Estados Unidos.
+            
+            <p className="text-base text-slate-600 mb-8 leading-relaxed">
+              Tu fuente confiable de información sobre inmigración, visas y derechos legales en Estados Unidos.
             </p>
+            
             <div className="flex gap-3">
               <a
                 href={siteConfig.links.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-ink-800 flex items-center justify-center hover:bg-accent-gold transition-colors group"
+                className="w-12 h-12 rounded-xl border-2 border-gray-200 flex items-center justify-center text-slate-600 hover:border-blue-500 hover:text-white hover:bg-blue-500 transition-all shadow-sm"
                 aria-label="Facebook"
               >
-                <Facebook className="w-5 h-5 text-cream-300 group-hover:text-cream-50" />
+                <Facebook className="w-5 h-5" />
               </a>
               <a
                 href={siteConfig.links.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-ink-800 flex items-center justify-center hover:bg-accent-gold transition-colors group"
+                className="w-12 h-12 rounded-xl border-2 border-gray-200 flex items-center justify-center text-slate-600 hover:border-pink-500 hover:text-white hover:bg-pink-500 transition-all shadow-sm"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5 text-cream-300 group-hover:text-cream-50" />
+                <Instagram className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-xl bg-ink-800 flex items-center justify-center hover:bg-accent-gold transition-colors group"
+                className="w-12 h-12 rounded-xl border-2 border-gray-200 flex items-center justify-center text-slate-600 hover:border-red-500 hover:text-white hover:bg-red-500 transition-all shadow-sm"
                 aria-label="YouTube"
               >
-                <Youtube className="w-5 h-5 text-cream-300 group-hover:text-cream-50" />
+                <Youtube className="w-5 h-5" />
               </a>
             </div>
           </div>
 
           {/* Categories Column */}
           <div>
-            <h5 className="font-serif font-semibold text-cream-50 text-heading-md mb-6">
+            <h5 className="text-lg font-bold text-slate-900 mb-6">
               Categorías
             </h5>
             <ul className="space-y-3">
@@ -100,9 +98,10 @@ export default function Footer() {
                 <li key={category.slug}>
                   <Link
                     href={`/categoria/${category.slug}`}
-                    className="text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                    className="text-base text-slate-600 hover:text-yellow-600 transition-colors inline-flex items-center group"
                   >
-                    {category.name}
+                    <span>{category.name}</span>
+                    <ChevronRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-1 transition-all" />
                   </Link>
                 </li>
               ))}
@@ -111,48 +110,53 @@ export default function Footer() {
 
           {/* Resources Column */}
           <div>
-            <h5 className="font-serif font-semibold text-cream-50 text-heading-md mb-6">
+            <h5 className="text-lg font-bold text-slate-900 mb-6">
               Recursos
             </h5>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/guias"
-                  className="text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="text-base text-slate-600 hover:text-yellow-600 transition-colors inline-flex items-center group"
                 >
-                  Guías Completas
+                  <span>Guías Completas</span>
+                  <ChevronRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-1 transition-all" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/preguntas-frecuentes"
-                  className="text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="text-base text-slate-600 hover:text-yellow-600 transition-colors inline-flex items-center group"
                 >
-                  Preguntas Frecuentes
+                  <span>Preguntas Frecuentes</span>
+                  <ChevronRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-1 transition-all" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/glosario"
-                  className="text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="text-base text-slate-600 hover:text-yellow-600 transition-colors inline-flex items-center group"
                 >
-                  Glosario Legal
+                  <span>Glosario Legal</span>
+                  <ChevronRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-1 transition-all" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/herramientas"
-                  className="text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="text-base text-slate-600 hover:text-yellow-600 transition-colors inline-flex items-center group"
                 >
-                  Herramientas Útiles
+                  <span>Herramientas Útiles</span>
+                  <ChevronRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-1 transition-all" />
                 </Link>
               </li>
               <li>
                 <Link
                   href="/nosotros"
-                  className="text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="text-base text-slate-600 hover:text-yellow-600 transition-colors inline-flex items-center group"
                 >
-                  Quiénes Somos
+                  <span>Quiénes Somos</span>
+                  <ChevronRight className="w-4 h-4 opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-1 transition-all" />
                 </Link>
               </li>
             </ul>
@@ -160,36 +164,41 @@ export default function Footer() {
 
           {/* Contact Column */}
           <div>
-            <h5 className="font-serif font-semibold text-cream-50 text-heading-md mb-6">
+            <h5 className="text-lg font-bold text-slate-900 mb-6">
               Contacto
             </h5>
-            <ul className="space-y-4">
+            <ul className="space-y-5">
               <li>
                 <a
                   href="tel:+18000000000"
-                  className="flex items-center gap-3 text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="flex items-center gap-3 text-base text-slate-600 hover:text-yellow-600 transition-colors group"
                 >
-                  <Phone className="w-5 h-5 text-accent-gold" />
-                  1-800-000-0000
+                  <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center group-hover:bg-yellow-500 transition-colors">
+                    <Phone className="w-5 h-5 text-yellow-600 group-hover:text-white" />
+                  </div>
+                  <span className="font-medium">1-800-000-0000</span>
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:info@elportaldelinmigrante.com"
-                  className="flex items-center gap-3 text-cream-300 hover:text-accent-gold transition-colors text-body-md"
+                  className="flex items-center gap-3 text-base text-slate-600 hover:text-yellow-600 transition-colors group"
                 >
-                  <Mail className="w-5 h-5 text-accent-gold" />
-                  info@elportaldelinmigrante.com
+                  <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center group-hover:bg-yellow-500 transition-colors">
+                    <Mail className="w-5 h-5 text-yellow-600 group-hover:text-white" />
+                  </div>
+                  <span className="font-medium">info@elportaldelinmigrante.com</span>
                 </a>
               </li>
               <li>
-                <div className="flex items-start gap-3 text-cream-300 text-body-md">
-                  <MapPin className="w-5 h-5 text-accent-gold flex-shrink-0 mt-0.5" />
-                  <span>
-                    Houston, TX
-                    <br />
-                    Estados Unidos
-                  </span>
+                <div className="flex items-start gap-3 text-base text-slate-600">
+                  <div className="w-10 h-10 rounded-lg bg-yellow-100 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-yellow-600" />
+                  </div>
+                  <div className="pt-1">
+                    <span className="font-medium block">Houston, TX</span>
+                    <span>Estados Unidos</span>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -197,40 +206,42 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Powered By Section */}
-      <div className="relative border-t border-ink-700/50 bg-ink-800/50">
-        <div className="max-w-wide mx-auto px-4 lg:px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-body-sm text-ink-400 text-center md:text-left">
+      {/* Bottom Bar - Espacioso */}
+      <div className="border-t border-gray-100 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm">
+            <p className="text-slate-600">
               © {currentYear} {siteConfig.name}. Todos los derechos reservados.
             </p>
-            <div className="flex items-center gap-2 text-body-sm text-ink-400">
+            
+            <div className="flex items-center gap-2 text-slate-600">
               <span>Una iniciativa de</span>
               <a
                 href="https://manuelsolis.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent-gold hover:text-accent-copper transition-colors font-medium"
+                className="text-yellow-600 hover:text-yellow-700 transition-colors font-semibold"
               >
                 Manuel Solis Law Firm
               </a>
             </div>
-            <div className="flex items-center gap-6 text-body-sm">
+            
+            <div className="flex items-center gap-8">
               <Link
                 href="/privacidad"
-                className="text-ink-400 hover:text-cream-100 transition-colors"
+                className="text-slate-600 hover:text-slate-900 transition-colors font-medium"
               >
                 Privacidad
               </Link>
               <Link
                 href="/terminos"
-                className="text-ink-400 hover:text-cream-100 transition-colors"
+                className="text-slate-600 hover:text-slate-900 transition-colors font-medium"
               >
                 Términos
               </Link>
               <Link
                 href="/sitemap"
-                className="text-ink-400 hover:text-cream-100 transition-colors"
+                className="text-slate-600 hover:text-slate-900 transition-colors font-medium"
               >
                 Sitemap
               </Link>

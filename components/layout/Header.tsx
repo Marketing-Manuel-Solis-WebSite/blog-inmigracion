@@ -2,167 +2,211 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search, ChevronDown } from 'lucide-react';
+import { Menu, X, Search, Phone, ChevronRight, Globe, ArrowUpRight, Shield } from 'lucide-react';
 import { navigation, siteConfig } from '@/lib/config';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-cream-50/95 backdrop-blur-md shadow-editorial border-b border-ink-100/50'
-            : 'bg-transparent'
-        }`}
-      >
-        {/* Top Bar */}
-        <div className="hidden lg:block bg-ink-900 text-cream-100">
-          <div className="max-w-wide mx-auto px-6 py-2 flex justify-between items-center text-body-sm">
-            <p>Tu guía confiable sobre inmigración y derechos legales en USA</p>
-            <div className="flex items-center gap-6">
-              <a href="tel:+18000000000" className="hover:text-accent-gold transition-colors">
-                📞 1-800-000-0000
-              </a>
-              <span className="text-ink-400">|</span>
-              <span>🇺🇸 Español</span>
-            </div>
+      {/* Top Bar Minimalista */}
+      <div className="bg-slate-950 text-white border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-9 flex justify-between items-center text-xs">
+          <a 
+            href="https://manuelsolis.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+          >
+            <Shield className="w-3 h-3 text-yellow-500" />
+            <span className="font-medium">Manuel Solis Law Firm</span>
+            <ArrowUpRight className="w-2.5 h-2.5" />
+          </a>
+
+          <div className="flex items-center gap-4">
+            <a href="tel:+18000000000" className="hidden sm:flex items-center gap-1.5 text-white/70 hover:text-yellow-500 transition-colors">
+              <Phone className="w-3 h-3" />
+              <span className="font-medium">1-800-000-0000</span>
+            </a>
+            
+            <div className="h-3 w-px bg-white/10" />
+            
+            <button className="flex items-center gap-1 text-white/70 hover:text-white transition-colors">
+              <Globe className="w-3 h-3" />
+              <span className="font-medium">ES</span>
+            </button>
           </div>
         </div>
+      </div>
 
-        {/* Main Nav */}
-        <nav className="max-w-wide mx-auto px-4 lg:px-6">
-          <div className="flex items-center justify-between h-18 lg:h-22">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-accent-gold to-accent-copper flex items-center justify-center shadow-glow-gold group-hover:scale-105 transition-transform">
-                <span className="text-cream-50 font-display font-bold text-xl lg:text-2xl">P</span>
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="font-display font-semibold text-ink-900 text-lg lg:text-xl leading-tight">
-                  El Portal del
-                </h1>
-                <p className="text-accent-gold font-serif text-sm lg:text-base -mt-1">Inmigrante</p>
-              </div>
-            </Link>
+      {/* Main Header */}
+      <header
+        className={`fixed top-9 left-0 right-0 z-40 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-white/98 backdrop-blur-sm shadow-sm border-b border-gray-100'
+            : 'bg-white border-b border-gray-50'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          
+          {/* Logo Minimalista */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-lg bg-slate-950 flex items-center justify-center group-hover:bg-slate-900 transition-colors">
+              <span className="text-yellow-500 font-bold text-lg">P</span>
+            </div>
+            <div className="flex flex-col -space-y-1">
+              <span className="text-slate-900 text-base font-bold tracking-tight">
+                El Portal
+              </span>
+              <span className="text-yellow-600 text-[10px] font-semibold uppercase tracking-wider">
+                del Inmigrante
+              </span>
+            </div>
+          </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navigation.map((item) => (
+          {/* Navegación Simple */}
+          <div className="hidden lg:flex items-center gap-8">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
+              
+              return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="px-4 py-2 text-ink-700 hover:text-ink-900 font-medium text-body-md link-underline transition-colors"
+                  className={`relative text-sm font-medium transition-colors ${
+                    isActive 
+                      ? 'text-slate-900' 
+                      : 'text-slate-500 hover:text-slate-900'
+                  }`}
                 >
                   {item.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="indicator"
+                      className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-yellow-500"
+                      transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                    />
+                  )}
                 </Link>
-              ))}
-            </div>
+              );
+            })}
+          </div>
 
-            {/* Actions */}
-            <div className="flex items-center gap-2 lg:gap-4">
-              {/* Search Button */}
-              <button
-                onClick={() => setIsSearchOpen(true)}
-                className="p-2 lg:p-3 rounded-xl hover:bg-ink-100/50 transition-colors"
-                aria-label="Buscar"
-              >
-                <Search className="w-5 h-5 text-ink-600" />
-              </button>
+          {/* Acciones Limpias */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="w-8 h-8 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors"
+              aria-label="Buscar"
+            >
+              <Search className="w-4 h-4" />
+            </button>
 
-              {/* CTA Button */}
-              <Link
-                href="/contacto"
-                className="hidden md:inline-flex btn-gold text-sm"
-              >
-                Consulta Gratis
-              </Link>
+            <Link
+              href="/contacto"
+              className="hidden sm:inline-flex items-center px-4 py-1.5 bg-slate-950 text-white text-sm font-medium rounded-md hover:bg-yellow-600 transition-colors ml-2"
+            >
+              Consulta Gratis
+            </Link>
 
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 rounded-xl hover:bg-ink-100/50 transition-colors"
-                aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6 text-ink-700" />
-                ) : (
-                  <Menu className="w-6 h-6 text-ink-700" />
-                )}
-              </button>
-            </div>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden w-8 h-8 flex items-center justify-center text-slate-900"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </nav>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Spacer */}
+      <div className="h-[100px]" />
+
+      {/* Menú Móvil Limpio */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-30 lg:hidden bg-white"
           >
-            <div
-              className="absolute inset-0 bg-ink-900/50 backdrop-blur-sm"
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-            <motion.nav
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-80 max-w-full bg-cream-50 shadow-editorial-xl"
-            >
-              <div className="p-6 pt-24">
-                <div className="flex flex-col gap-2">
+            <div className="pt-[100px] h-full overflow-y-auto">
+              <div className="px-6 py-8">
+                <nav className="space-y-1">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-3 text-ink-800 hover:text-accent-gold hover:bg-ink-50 rounded-xl font-medium text-lg transition-colors"
+                        className="flex items-center justify-between py-4 text-slate-900 hover:text-yellow-600 transition-colors border-b border-gray-50"
                       >
-                        {item.label}
+                        <span className="text-lg font-medium">{item.label}</span>
+                        <ChevronRight className="w-5 h-5 text-slate-300" />
                       </Link>
                     </motion.div>
                   ))}
-                </div>
-                <div className="mt-8 pt-8 border-t border-ink-100">
+                </nav>
+
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="mt-8 space-y-4"
+                >
                   <Link
                     href="/contacto"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="btn-gold w-full justify-center"
+                    className="flex items-center justify-center w-full py-3 bg-slate-950 text-white font-medium rounded-md hover:bg-yellow-600 transition-colors"
                   >
-                    Consulta Gratis
+                    Agendar Consulta Gratis
                   </Link>
-                </div>
+                  
+                  <div className="pt-6 border-t border-gray-100">
+                    <div className="flex gap-3">
+                      <a href={siteConfig.links.facebook} className="flex-1 py-2.5 text-center text-sm text-slate-600 hover:text-blue-600 transition-colors">
+                        Facebook
+                      </a>
+                      <a href={siteConfig.links.instagram} className="flex-1 py-2.5 text-center text-sm text-slate-600 hover:text-pink-600 transition-colors">
+                        Instagram
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
               </div>
-            </motion.nav>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Search Modal */}
+      {/* Modal de Búsqueda Minimalista */}
       <AnimatePresence>
         {isSearchOpen && (
           <motion.div
@@ -172,46 +216,43 @@ export default function Header() {
             className="fixed inset-0 z-50 flex items-start justify-center pt-32 px-4"
           >
             <div
-              className="absolute inset-0 bg-ink-900/70 backdrop-blur-sm"
+              className="absolute inset-0 bg-slate-900/20 backdrop-blur-sm"
               onClick={() => setIsSearchOpen(false)}
             />
+            
             <motion.div
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl bg-cream-50 rounded-2xl shadow-editorial-xl overflow-hidden"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="relative w-full max-w-2xl bg-white rounded-lg shadow-xl border border-gray-100"
             >
-              <div className="p-4">
-                <div className="flex items-center gap-4">
-                  <Search className="w-6 h-6 text-ink-400" />
-                  <input
-                    type="text"
-                    placeholder="Buscar artículos, guías, noticias..."
-                    className="flex-1 bg-transparent text-xl text-ink-800 placeholder:text-ink-400 focus:outline-none"
-                    autoFocus
-                  />
-                  <button
-                    onClick={() => setIsSearchOpen(false)}
-                    className="p-2 hover:bg-ink-100 rounded-lg transition-colors"
-                  >
-                    <X className="w-5 h-5 text-ink-500" />
-                  </button>
-                </div>
+              <div className="flex items-center gap-3 p-4 border-b border-gray-50">
+                <Search className="w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Buscar información legal..."
+                  className="flex-1 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none"
+                  autoFocus
+                />
+                <button
+                  onClick={() => setIsSearchOpen(false)}
+                  className="p-1 text-slate-400 hover:text-slate-900 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
               </div>
-              <div className="border-t border-ink-100 p-4">
-                <p className="text-body-sm text-ink-500 mb-3">Búsquedas populares:</p>
+              
+              <div className="p-4">
+                <p className="text-xs text-slate-400 uppercase tracking-wide mb-3">Búsquedas populares</p>
                 <div className="flex flex-wrap gap-2">
-                  {['DACA 2024', 'Visa U requisitos', 'Accidente sin papeles', 'TPS Venezuela'].map(
-                    (term) => (
-                      <button
-                        key={term}
-                        className="px-3 py-1.5 bg-ink-100/50 text-ink-700 rounded-full text-sm hover:bg-accent-gold/10 hover:text-accent-gold transition-colors"
-                      >
-                        {term}
-                      </button>
-                    )
-                  )}
+                  {['Renovación DACA 2025', 'Visa U', 'Permiso de trabajo', 'Accidentes'].map(term => (
+                    <button 
+                      key={term}
+                      className="px-3 py-1.5 text-sm text-slate-600 hover:text-yellow-600 border border-gray-200 hover:border-yellow-500 rounded-md transition-colors"
+                    >
+                      {term}
+                    </button>
+                  ))}
                 </div>
               </div>
             </motion.div>
@@ -219,8 +260,15 @@ export default function Header() {
         )}
       </AnimatePresence>
 
-      {/* Spacer for fixed header */}
-      <div className="h-18 lg:h-32" />
+      <style jsx global>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      `}</style>
     </>
   );
 }
